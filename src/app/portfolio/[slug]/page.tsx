@@ -4,7 +4,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { getPortfolioItem, portfolioItems } from "@/data/portfolio";
+import { getPortfolioItem } from "@/data/portfolio";
+import { getPortfolioItemBySlug, getPortfolioItems } from "@/sanity/portfolio";
 
 type PortfolioDetailPageProps = {
   params: Promise<{
@@ -12,8 +13,10 @@ type PortfolioDetailPageProps = {
   }>;
 };
 
-export function generateStaticParams() {
-  return portfolioItems.map((item) => ({
+export async function generateStaticParams() {
+  const items = await getPortfolioItems();
+
+  return items.map((item) => ({
     slug: item.slug,
   }));
 }
@@ -22,7 +25,7 @@ export async function generateMetadata({
   params,
 }: PortfolioDetailPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const item = getPortfolioItem(slug);
+  const item = await getPortfolioItemBySlug(slug);
 
   if (!item) {
     return {};
@@ -36,7 +39,7 @@ export async function generateMetadata({
 
 export default async function PortfolioDetailPage({ params }: PortfolioDetailPageProps) {
   const { slug } = await params;
-  const item = getPortfolioItem(slug);
+  const item = await getPortfolioItemBySlug(slug);
 
   if (!item) {
     notFound();

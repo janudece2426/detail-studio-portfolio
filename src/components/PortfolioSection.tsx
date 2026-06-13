@@ -7,11 +7,15 @@ import { useMemo, useState } from "react";
 import { categories, portfolioItems, type PortfolioCategory, type PortfolioItem } from "@/data/portfolio";
 import { SectionHeading } from "./SectionHeading";
 
-export function PortfolioSection() {
+type PortfolioSectionProps = {
+  items?: PortfolioItem[];
+};
+
+export function PortfolioSection({ items = portfolioItems }: PortfolioSectionProps) {
   const [active, setActive] = useState<PortfolioCategory>("전체");
   const filtered = useMemo(
-    () => portfolioItems.filter((item) => active === "전체" || item.category === active),
-    [active],
+    () => items.filter((item) => active === "전체" || item.category === active),
+    [active, items],
   );
 
   return (

@@ -10,11 +10,15 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@sanity/client": "^7.11.1",
     "framer-motion": "^12.4.7",
     "lucide-react": "^0.468.0",
     "next": "^15.2.4",
+    "next-sanity": "^10.1.4",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "sanity": "^4.7.0",
+    "styled-components": "^6.1.19"
   },
   "devDependencies": {
     "@types/node": "^22.10.7",

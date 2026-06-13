@@ -6,15 +6,18 @@ import { PackageSection } from "@/components/PackageSection";
 import { PortfolioSection } from "@/components/PortfolioSection";
 import { ProcessSection } from "@/components/ProcessSection";
 import { ServicesSection } from "@/components/ServicesSection";
+import { getPortfolioItems } from "@/sanity/portfolio";
 
-export default function Home() {
+export default async function Home() {
+  const portfolioItems = await getPortfolioItems();
+
   return (
     <>
       <Header />
       <main>
         <HeroSection />
         <ServicesSection />
-        <PortfolioSection />
+        <PortfolioSection items={portfolioItems} />
         <ProcessSection />
         <PackageSection />
         <ContactSection />
