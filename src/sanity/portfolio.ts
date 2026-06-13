@@ -41,7 +41,7 @@ function toPortfolioItem(item: SanityPortfolio): PortfolioItem | null {
     accent: item.accent || "gold",
     image: item.thumbnail?.asset?.url,
     detailImage: item.detailImage?.asset?.url,
-    originalUrl: item.originalUrl || "#",
+    originalUrl: item.originalUrl || item.detailImage?.asset?.url || "#",
     summary: item.summary || item.point,
     detailSections: [],
   };

@@ -97,6 +97,7 @@ export default async function PortfolioDetailPage({ params }: PortfolioDetailPag
 }
 
 function DetailPreview({ item }: { item: NonNullable<ReturnType<typeof getPortfolioItem>> }) {
+  const originalHref = item.detailImage ? `/portfolio/${item.slug}/original` : item.originalUrl;
   const accent = {
     gold: "from-gold/80 to-gold/15",
     mint: "from-mint/70 to-mint/15",
@@ -109,7 +110,7 @@ function DetailPreview({ item }: { item: NonNullable<ReturnType<typeof getPortfo
         <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-gold/80">
           Thumbnail
         </p>
-        <div className="relative aspect-[16/9] overflow-hidden rounded-lg bg-white/[0.04]">
+        <div className="relative aspect-square overflow-hidden rounded-lg bg-white/[0.04]">
           {item.image ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img src={item.image} alt={`${item.title} 썸네일`} className="h-full w-full object-cover" />
@@ -134,7 +135,7 @@ function DetailPreview({ item }: { item: NonNullable<ReturnType<typeof getPortfo
             Detail Page Original
           </p>
           <a
-            href={item.originalUrl}
+            href={originalHref}
             target="_blank"
             rel="noreferrer"
             className="inline-flex w-fit items-center justify-center gap-2 rounded-full bg-ivory px-5 py-3 text-sm font-semibold text-charcoal transition hover:-translate-y-0.5 hover:bg-white"

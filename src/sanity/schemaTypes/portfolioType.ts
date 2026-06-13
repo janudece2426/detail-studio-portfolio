@@ -59,7 +59,7 @@ export const portfolioType = defineType({
     defineField({
       name: "thumbnail",
       title: "썸네일 이미지",
-      description: "추천 가로 800px 기준",
+      description: "추천 1000 x 1000px 정사각형",
       type: "image",
       options: {
         hotspot: true,
