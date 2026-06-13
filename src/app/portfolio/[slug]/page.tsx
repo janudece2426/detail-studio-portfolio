@@ -1,4 +1,4 @@
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ExternalLink } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -55,14 +55,28 @@ export default async function PortfolioDetailPage({ params }: PortfolioDetailPag
             Portfolio
           </Link>
 
-          <div className="mt-10 grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-            <aside className="lg:sticky lg:top-28">
-              <p className="text-sm font-semibold text-gold">{item.category}</p>
-              <h1 className="mt-4 text-balance text-4xl font-semibold leading-tight sm:text-6xl">
-                {item.title}
-              </h1>
-              <p className="mt-6 text-lg leading-8 text-ivory/78">{item.summary}</p>
-              <div className="mt-8 flex flex-wrap gap-2">
+          <div className="mt-10">
+            <div className="flex flex-col justify-between gap-8 border-b border-white/10 pb-10 lg:flex-row lg:items-end">
+              <div className="max-w-4xl">
+                <p className="text-sm font-semibold text-gold">{item.category}</p>
+                <h1 className="mt-4 text-balance text-4xl font-semibold leading-tight sm:text-6xl">
+                  {item.title}
+                </h1>
+                <p className="mt-6 max-w-3xl text-lg leading-8 text-ivory/78">{item.summary}</p>
+              </div>
+              <a
+                href={item.originalUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-ivory px-6 py-4 text-sm font-semibold text-charcoal transition hover:-translate-y-0.5 hover:bg-white"
+              >
+                원본 보기
+                <ExternalLink size={16} />
+              </a>
+            </div>
+
+            <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex flex-wrap gap-2">
                 {item.scope.map((scope) => (
                   <span
                     key={scope}
@@ -72,12 +86,12 @@ export default async function PortfolioDetailPage({ params }: PortfolioDetailPag
                   </span>
                 ))}
               </div>
-              <p className="mt-8 border-t border-white/10 pt-6 text-sm leading-7 text-muted">
+              <p className="max-w-2xl text-sm leading-7 text-muted">
                 핵심 포인트: {item.point}
               </p>
-            </aside>
+            </div>
 
-            <section className="overflow-hidden rounded-lg border border-white/10 bg-white/[0.045] p-4 backdrop-blur-xl">
+            <section className="mt-10 overflow-hidden rounded-lg border border-white/10 bg-white/[0.045] p-4 backdrop-blur-xl">
               <DetailPreview item={item} />
             </section>
           </div>
