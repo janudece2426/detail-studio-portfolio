@@ -1,13 +1,10 @@
 import { AdminStudio } from "@/components/AdminStudio";
+import { hasSanityConfig } from "@/sanity/client";
 
 export const dynamic = "force-static";
 
-const hasSanityProject =
-  Boolean(process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) &&
-  Boolean(process.env.NEXT_PUBLIC_SANITY_DATASET);
-
 export default function AdminPage() {
-  if (!hasSanityProject) {
+  if (!hasSanityConfig) {
     return (
       <main
         style={{

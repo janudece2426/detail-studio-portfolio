@@ -1,15 +1,13 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { schemaTypes } from "./src/sanity/schemaTypes";
-
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "detailstudio";
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
+import { sanityDataset, sanityProjectId } from "./src/sanity/env";
 
 export default defineConfig({
   name: "detail_studio",
   title: "Detail Studio Admin",
-  projectId,
-  dataset,
+  projectId: sanityProjectId,
+  dataset: sanityDataset,
   basePath: "/admin",
   plugins: [structureTool()],
   schema: {
