@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { categories, portfolioItems, type PortfolioCategory, type PortfolioItem } from "@/data/portfolio";
 import { SectionHeading } from "./SectionHeading";
@@ -54,31 +55,35 @@ export function PortfolioSection() {
 
 function PortfolioCard({ item }: { item: PortfolioItem }) {
   return (
-    <motion.article
+    <motion.div
       layout
       initial={{ opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 18 }}
       transition={{ duration: 0.35 }}
-      className="group overflow-hidden rounded-lg border border-white/10 bg-white/[0.055] p-4 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-gold/30"
     >
-      <PortfolioMockup item={item} />
-      <div className="p-3 pt-6">
-        <div className="mb-4 flex items-center justify-between gap-4">
-          <p className="text-sm text-gold">{item.category}</p>
-          <span className="grid size-9 place-items-center rounded-full border border-white/10 text-muted transition group-hover:border-gold/40 group-hover:text-gold">
-            <ArrowUpRight size={17} />
-          </span>
+      <Link
+        href={`/portfolio/${item.slug}`}
+        className="group block overflow-hidden rounded-lg border border-white/10 bg-white/[0.055] p-4 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-gold/30"
+      >
+        <PortfolioMockup item={item} />
+        <div className="p-3 pt-6">
+          <div className="mb-4 flex items-center justify-between gap-4">
+            <p className="text-sm text-gold">{item.category}</p>
+            <span className="grid size-9 place-items-center rounded-full border border-white/10 text-muted transition group-hover:border-gold/40 group-hover:text-gold">
+              <ArrowUpRight size={17} />
+            </span>
+          </div>
+          <h3 className="text-2xl font-semibold text-ivory">{item.title}</h3>
+          <p className="mt-4 text-sm leading-7 text-muted">
+            작업 범위: {item.scope.join(" / ")}
+          </p>
+          <p className="mt-3 border-t border-white/10 pt-4 text-sm leading-7 text-muted">
+            핵심 포인트: {item.point}
+          </p>
         </div>
-        <h3 className="text-2xl font-semibold text-ivory">{item.title}</h3>
-        <p className="mt-4 text-sm leading-7 text-muted">
-          작업 범위: {item.scope.join(" / ")}
-        </p>
-        <p className="mt-3 border-t border-white/10 pt-4 text-sm leading-7 text-muted">
-          핵심 포인트: {item.point}
-        </p>
-      </div>
-    </motion.article>
+      </Link>
+    </motion.div>
   );
 }
 
