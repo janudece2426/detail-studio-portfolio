@@ -82,7 +82,7 @@ export default async function PortfolioDetailPage({ params }: PortfolioDetailPag
               </p>
             </div>
 
-            <section className="mt-10 overflow-hidden rounded-lg border border-white/10 bg-white/[0.045] p-4 backdrop-blur-xl">
+            <section className="mx-auto mt-10 max-w-[800px] overflow-hidden rounded-lg border border-white/10 bg-white/[0.045] p-4 backdrop-blur-xl">
               <DetailPreview item={item} />
             </section>
           </div>
@@ -141,14 +141,16 @@ function DetailPreview({ item }: { item: NonNullable<ReturnType<typeof getPortfo
           </a>
         </div>
         {item.detailImage ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={item.detailImage}
-            alt={`${item.title} 긴 상세페이지 원본`}
-            className="w-full rounded-lg object-cover"
-          />
+          <div className="max-h-[1500px] overflow-hidden rounded-lg">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={item.detailImage}
+              alt={`${item.title} 긴 상세페이지 원본`}
+              className="w-full object-cover object-top"
+            />
+          </div>
         ) : (
-          <div className="min-h-[1500px] rounded-lg border border-dashed border-white/15 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.025)_22%,rgba(216,183,106,0.08)_48%,rgba(134,242,211,0.05)_74%,rgba(255,255,255,0.04))] p-6">
+          <div className="h-[1500px] overflow-hidden rounded-lg border border-dashed border-white/15 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.025)_22%,rgba(216,183,106,0.08)_48%,rgba(134,242,211,0.05)_74%,rgba(255,255,255,0.04))] p-6">
             <div className="sticky top-24 rounded-lg border border-white/10 bg-charcoal/80 p-6 backdrop-blur-xl">
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-gold">
                 Long Detail Image
