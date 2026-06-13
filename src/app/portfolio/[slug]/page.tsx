@@ -56,7 +56,7 @@ export default async function PortfolioDetailPage({ params }: PortfolioDetailPag
           </Link>
 
           <div className="mt-10">
-            <div className="flex flex-col justify-between gap-8 border-b border-white/10 pb-10 lg:flex-row lg:items-end">
+            <div className="border-b border-white/10 pb-10">
               <div className="max-w-4xl">
                 <p className="text-sm font-semibold text-gold">{item.category}</p>
                 <h1 className="mt-4 text-balance text-4xl font-semibold leading-tight sm:text-6xl">
@@ -64,15 +64,6 @@ export default async function PortfolioDetailPage({ params }: PortfolioDetailPag
                 </h1>
                 <p className="mt-6 max-w-3xl text-lg leading-8 text-ivory/78">{item.summary}</p>
               </div>
-              <a
-                href={item.originalUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-ivory px-6 py-4 text-sm font-semibold text-charcoal transition hover:-translate-y-0.5 hover:bg-white"
-              >
-                원본 보기
-                <ExternalLink size={16} />
-              </a>
             </div>
 
             <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
@@ -135,9 +126,20 @@ function DetailPreview({ item }: { item: NonNullable<ReturnType<typeof getPortfo
       </div>
 
       <div className="rounded-lg border border-white/10 bg-charcoal p-3">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-gold/80">
-          Detail Page Original
-        </p>
+        <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-gold/80">
+            Detail Page Original
+          </p>
+          <a
+            href={item.originalUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex w-fit items-center justify-center gap-2 rounded-full bg-ivory px-5 py-3 text-sm font-semibold text-charcoal transition hover:-translate-y-0.5 hover:bg-white"
+          >
+            원본 보기
+            <ExternalLink size={15} />
+          </a>
+        </div>
         {item.detailImage ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
