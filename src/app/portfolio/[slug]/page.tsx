@@ -1,4 +1,4 @@
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -75,28 +75,10 @@ export default async function PortfolioDetailPage({ params }: PortfolioDetailPag
               <p className="mt-8 border-t border-white/10 pt-6 text-sm leading-7 text-muted">
                 핵심 포인트: {item.point}
               </p>
-              <a
-                href={item.originalUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-ivory px-6 py-4 text-sm font-semibold text-charcoal transition hover:-translate-y-0.5 hover:bg-white"
-              >
-                원본 보기
-                <ExternalLink size={16} />
-              </a>
             </aside>
 
             <section className="overflow-hidden rounded-lg border border-white/10 bg-white/[0.045] p-4 backdrop-blur-xl">
-              {item.detailImage ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={item.detailImage}
-                  alt={`${item.title} 상세페이지`}
-                  className="w-full rounded-lg object-cover"
-                />
-              ) : (
-                <DetailMockup item={item} />
-              )}
+              <DetailPreview item={item} />
             </section>
           </div>
         </section>
@@ -106,7 +88,7 @@ export default async function PortfolioDetailPage({ params }: PortfolioDetailPag
   );
 }
 
-function DetailMockup({ item }: { item: NonNullable<ReturnType<typeof getPortfolioItem>> }) {
+function DetailPreview({ item }: { item: NonNullable<ReturnType<typeof getPortfolioItem>> }) {
   const accent = {
     gold: "from-gold/80 to-gold/15",
     mint: "from-mint/70 to-mint/15",
@@ -114,48 +96,54 @@ function DetailMockup({ item }: { item: NonNullable<ReturnType<typeof getPortfol
   }[item.accent];
 
   return (
-    <div className="min-h-[1200px] rounded-lg bg-charcoal">
-      <div className={`rounded-lg bg-gradient-to-br ${accent} p-8 sm:p-12`}>
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-charcoal/70">
-          Detail Page Preview
+    <div className="space-y-4">
+      <div className="rounded-lg border border-white/10 bg-charcoal p-3">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-gold/80">
+          Thumbnail
         </p>
-        <h2 className="mt-8 max-w-xl text-4xl font-semibold leading-tight text-charcoal sm:text-6xl">
-          {item.title}
-        </h2>
-        <p className="mt-6 max-w-2xl text-base leading-8 text-charcoal/75">{item.summary}</p>
-      </div>
-
-      <div className="space-y-5 p-4 sm:p-6">
-        {item.detailSections.map((section, index) => (
-          <article
-            key={section.title}
-            className="grid gap-5 rounded-lg border border-white/10 bg-white/[0.055] p-6 sm:grid-cols-[180px_1fr]"
-          >
-            <div>
-              <p className="text-sm font-semibold text-gold">
-                {String(index + 1).padStart(2, "0")}
-              </p>
-              <h3 className="mt-3 text-2xl font-semibold text-ivory">{section.title}</h3>
-            </div>
-            <div>
-              <p className="text-base leading-8 text-muted">{section.description}</p>
-              <div className="mt-8 grid gap-3 sm:grid-cols-3">
-                <div className="h-28 rounded-lg bg-white/[0.08]" />
-                <div className="h-28 rounded-lg bg-white/[0.08]" />
-                <div className="h-28 rounded-lg bg-white/[0.08]" />
+        <div className="relative aspect-[16/9] overflow-hidden rounded-lg bg-white/[0.04]">
+          {item.image ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={item.image} alt={`${item.title} 썸네일`} className="h-full w-full object-cover" />
+          ) : (
+            <div className={`flex h-full items-end bg-gradient-to-br ${accent} p-6`}>
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-charcoal/60">
+                  Portfolio Thumbnail
+                </p>
+                <h2 className="mt-4 max-w-xl text-3xl font-semibold leading-tight text-charcoal sm:text-5xl">
+                  {item.title}
+                </h2>
               </div>
             </div>
-          </article>
-        ))}
-
-        <div className="rounded-lg border border-gold/20 bg-gold/[0.07] p-8 text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gold">
-            Purchase Flow
-          </p>
-          <p className="mx-auto mt-4 max-w-xl text-xl font-semibold leading-8 text-ivory">
-            상품 가치가 읽히고, 장점이 설득되고, 마지막에는 구매 이유가 남도록 구성합니다.
-          </p>
+          )}
         </div>
+      </div>
+
+      <div className="rounded-lg border border-white/10 bg-charcoal p-3">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-gold/80">
+          Detail Page Original
+        </p>
+        {item.detailImage ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={item.detailImage}
+            alt={`${item.title} 긴 상세페이지 원본`}
+            className="w-full rounded-lg object-cover"
+          />
+        ) : (
+          <div className="min-h-[1500px] rounded-lg border border-dashed border-white/15 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.025)_22%,rgba(216,183,106,0.08)_48%,rgba(134,242,211,0.05)_74%,rgba(255,255,255,0.04))] p-6">
+            <div className="sticky top-24 rounded-lg border border-white/10 bg-charcoal/80 p-6 backdrop-blur-xl">
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-gold">
+                Long Detail Image
+              </p>
+              <p className="mt-3 text-xl font-semibold text-ivory">{item.title}</p>
+              <p className="mt-3 text-sm leading-7 text-muted">
+                관리자에서 긴 상세페이지 원본 이미지를 첨부하면 이 영역에 세로로 길게 표시됩니다.
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
