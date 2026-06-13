@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  background: #0a0a09;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #0a0a09;
+  color: #f4ecdc;
+  font-family:
+    Pretendard,
+    "Apple SD Gothic Neo",
+    "Malgun Gothic",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(216, 183, 106, 0.35);
+  color: #f4ecdc;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.hero-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23noise)' opacity='0.55'/%3E%3C/svg%3E");
+  mix-blend-mode: soft-light;
+}
