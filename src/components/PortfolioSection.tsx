@@ -25,7 +25,7 @@ export function PortfolioSection({ items = portfolioItems }: PortfolioSectionPro
           <SectionHeading
             eyebrow="Portfolio"
             title="Portfolio"
-            description="상품의 매력을 구조화하고, 구매로 이어지는 흐름을 디자인합니다. 썸네일을 클릭하면 원본 상세페이지를 볼 수 있습니다."
+            description="상품의 매력을 구조화하고, 구매로 이어지는 흐름을 디자인합니다."
           />
           <div className="flex flex-wrap gap-2">
             {categories.map((category) => (
@@ -45,7 +45,11 @@ export function PortfolioSection({ items = portfolioItems }: PortfolioSectionPro
           </div>
         </div>
 
-        <motion.div layout className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <p className="mt-8 text-base font-semibold leading-7 text-ivory">
+          썸네일을 클릭하면 원본 상세페이지를 볼 수 있습니다.
+        </p>
+
+        <motion.div layout className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           <AnimatePresence mode="popLayout">
             {filtered.map((item) => (
               <PortfolioCard key={item.title} item={item} />
