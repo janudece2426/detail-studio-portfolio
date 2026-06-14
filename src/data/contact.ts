@@ -1,11 +1,12 @@
 export const contactLinks = [
   {
     label: "이메일 문의",
-    href: "mailto:jdart2026@gmail.com",
+    href: "https://mail.google.com/mail/?view=cm&fs=1&to=jdart2026@gmail.com",
   },
   {
     label: "카카오톡 문의",
-    href: "mailto:jd2426@kakao.com",
+    href: "#contact",
+    copyText: "jd2426",
   },
   {
     label: "크몽 바로가기",

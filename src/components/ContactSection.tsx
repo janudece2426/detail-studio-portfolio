@@ -1,8 +1,19 @@
-import { ArrowUpRight, Mail } from "lucide-react";
+"use client";
+
+import { useState } from "react";
+import { ArrowUpRight, Check, Copy, Mail } from "lucide-react";
 import { contactLinks } from "@/data/contact";
 import { SectionHeading } from "./SectionHeading";
 
 export function ContactSection() {
+  const [copiedLabel, setCopiedLabel] = useState<string | null>(null);
+
+  async function handleCopy(label: string, text: string) {
+    await navigator.clipboard.writeText(text);
+    setCopiedLabel(label);
+    window.setTimeout(() => setCopiedLabel(null), 1800);
+  }
+
   return (
     <section id="contact" className="relative overflow-hidden bg-charcoal px-5 py-24 sm:px-8">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(216,183,106,0.18),transparent_36%)]" />
@@ -16,18 +27,30 @@ export function ContactSection() {
           align="center"
         />
         <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {contactLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              target={link.href.startsWith("http") ? "_blank" : undefined}
-              rel={link.href.startsWith("http") ? "noreferrer" : undefined}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-charcoal/60 px-4 py-4 text-sm font-semibold text-ivory transition hover:-translate-y-0.5 hover:border-gold/40 hover:bg-gold/10"
-            >
-              {link.label}
-              <ArrowUpRight size={16} />
-            </a>
-          ))}
+          {contactLinks.map((link) =>
+            link.copyText ? (
+              <button
+                key={link.label}
+                type="button"
+                onClick={() => handleCopy(link.label, link.copyText)}
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-charcoal/60 px-4 py-4 text-sm font-semibold text-ivory transition hover:-translate-y-0.5 hover:border-gold/40 hover:bg-gold/10"
+              >
+                {copiedLabel === link.label ? "카카오 ID 복사됨" : link.label}
+                {copiedLabel === link.label ? <Check size={16} /> : <Copy size={16} />}
+              </button>
+            ) : (
+              <a
+                key={link.label}
+                href={link.href}
+                target={link.href.startsWith("http") ? "_blank" : undefined}
+                rel={link.href.startsWith("http") ? "noreferrer" : undefined}
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-charcoal/60 px-4 py-4 text-sm font-semibold text-ivory transition hover:-translate-y-0.5 hover:border-gold/40 hover:bg-gold/10"
+              >
+                {link.label}
+                <ArrowUpRight size={16} />
+              </a>
+            ),
+          )}
         </div>
       </div>
     </section>
