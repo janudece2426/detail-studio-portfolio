@@ -18,6 +18,7 @@ export type PortfolioItem = {
   accent: "gold" | "mint" | "ivory";
   image?: string;
   detailImage?: string;
+  detailImageWidth?: number;
   originalUrl: string;
   summary: string;
   detailSections: {

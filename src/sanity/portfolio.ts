@@ -9,7 +9,12 @@ type SanityPortfolio = {
   point?: string;
   summary?: string;
   thumbnail?: { asset?: { url?: string } };
-  detailImage?: { asset?: { url?: string } };
+  detailImage?: {
+    asset?: {
+      url?: string;
+      metadata?: { dimensions?: { width?: number } };
+    };
+  };
   originalUrl?: string;
   accent?: PortfolioItem["accent"];
 };
@@ -22,7 +27,7 @@ const portfolioFields = `
   point,
   summary,
   thumbnail{asset->{url}},
-  detailImage{asset->{url}},
+  detailImage{asset->{url, metadata{dimensions{width}}}},
   originalUrl,
   accent
 `;
@@ -44,6 +49,7 @@ function toPortfolioItem(item: SanityPortfolio): PortfolioItem | null {
     accent: item.accent || "gold",
     image: thumbnailUrl,
     detailImage: detailImageUrl,
+    detailImageWidth: item.detailImage?.asset?.metadata?.dimensions?.width,
     originalUrl: item.originalUrl || detailImageUrl || "#",
     summary: item.summary || item.point,
     detailSections: [],

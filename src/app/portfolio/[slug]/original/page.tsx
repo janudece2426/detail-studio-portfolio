@@ -40,6 +40,8 @@ export default async function OriginalPage({ params }: OriginalPageProps) {
     notFound();
   }
 
+  const imageMaxWidth = Math.min(item.detailImageWidth || 800, 800);
+
   return (
     <main className="min-h-screen bg-charcoal px-4 py-6 text-ivory sm:px-8">
       <div className="mx-auto max-w-5xl">
@@ -56,7 +58,10 @@ export default async function OriginalPage({ params }: OriginalPageProps) {
           </div>
         </div>
 
-        <section className="mx-auto max-w-[800px] overflow-hidden rounded-lg border border-white/10 bg-white p-0 shadow-2xl">
+        <section
+          className="mx-auto overflow-hidden rounded-lg border border-white/10 bg-white p-0 shadow-2xl"
+          style={{ maxWidth: imageMaxWidth }}
+        >
           {item.detailImage ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
