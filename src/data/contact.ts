@@ -5,8 +5,7 @@ export const contactLinks = [
   },
   {
     label: "카카오톡 문의",
-    href: "#contact",
-    copyText: "jd2426",
+    href: "https://open.kakao.com/o/gDD1hwzi",
   },
   {
     label: "크몽 바로가기",
