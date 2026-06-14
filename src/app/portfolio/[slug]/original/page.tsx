@@ -46,11 +46,11 @@ export default async function OriginalPage({ params }: OriginalPageProps) {
         <div className="mb-6 flex flex-col gap-4 border-b border-white/10 pb-6 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <Link
-              href={`/portfolio/${item.slug}`}
+              href="/#portfolio"
               className="inline-flex items-center gap-2 text-sm font-semibold text-muted transition hover:text-ivory"
             >
               <ArrowLeft size={16} />
-              상세페이지로 돌아가기
+              포트폴리오로 돌아가기
             </Link>
             <h1 className="mt-4 text-2xl font-semibold text-ivory sm:text-4xl">{item.title}</h1>
           </div>

@@ -67,7 +67,7 @@ function PortfolioCard({ item }: { item: PortfolioItem }) {
       transition={{ duration: 0.35 }}
     >
       <Link
-        href={`/portfolio/${item.slug}`}
+        href={`/portfolio/${item.slug}/original`}
         className="group block overflow-hidden rounded-lg border border-white/10 bg-white/[0.055] p-4 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-gold/30"
       >
         <PortfolioMockup item={item} />
@@ -104,25 +104,27 @@ function PortfolioMockup({ item }: { item: PortfolioItem }) {
         // eslint-disable-next-line @next/next/no-img-element
         <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
       ) : (
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(216,183,106,0.22),transparent_35%),radial-gradient(circle_at_80%_10%,rgba(134,242,211,0.16),transparent_30%),linear-gradient(145deg,#171613,#080808)]" />
+        <>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(216,183,106,0.22),transparent_35%),radial-gradient(circle_at_80%_10%,rgba(134,242,211,0.16),transparent_30%),linear-gradient(145deg,#171613,#080808)]" />
+          <div className="absolute left-6 top-6 w-36 rounded-lg border border-white/10 bg-white/10 p-3 backdrop-blur">
+            <div className={`h-16 rounded-lg ${color}`} />
+            <div className="mt-3 h-2 w-10/12 rounded-full bg-ivory/45" />
+            <div className="mt-2 h-2 w-7/12 rounded-full bg-ivory/20" />
+          </div>
+          <div className="absolute bottom-5 right-5 w-44 rounded-lg border border-white/10 bg-charcoal/80 p-4 backdrop-blur">
+            <div className="mb-4 flex gap-2">
+              <span className={`size-2 rounded-full ${color}`} />
+              <span className="size-2 rounded-full bg-white/25" />
+              <span className="size-2 rounded-full bg-white/25" />
+            </div>
+            <div className="space-y-2">
+              <div className="h-2 rounded-full bg-ivory/40" />
+              <div className="h-2 w-9/12 rounded-full bg-ivory/20" />
+              <div className="h-2 w-11/12 rounded-full bg-ivory/25" />
+            </div>
+          </div>
+        </>
       )}
-      <div className="absolute left-6 top-6 w-36 rounded-lg border border-white/10 bg-white/10 p-3 backdrop-blur">
-        <div className={`h-16 rounded-lg ${color}`} />
-        <div className="mt-3 h-2 w-10/12 rounded-full bg-ivory/45" />
-        <div className="mt-2 h-2 w-7/12 rounded-full bg-ivory/20" />
-      </div>
-      <div className="absolute bottom-5 right-5 w-44 rounded-lg border border-white/10 bg-charcoal/80 p-4 backdrop-blur">
-        <div className="mb-4 flex gap-2">
-          <span className={`size-2 rounded-full ${color}`} />
-          <span className="size-2 rounded-full bg-white/25" />
-          <span className="size-2 rounded-full bg-white/25" />
-        </div>
-        <div className="space-y-2">
-          <div className="h-2 rounded-full bg-ivory/40" />
-          <div className="h-2 w-9/12 rounded-full bg-ivory/20" />
-          <div className="h-2 w-11/12 rounded-full bg-ivory/25" />
-        </div>
-      </div>
       <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-charcoal to-transparent" />
     </div>
   );
