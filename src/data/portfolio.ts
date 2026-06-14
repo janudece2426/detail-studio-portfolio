@@ -19,6 +19,7 @@ export type PortfolioItem = {
   image?: string;
   detailImage?: string;
   detailImageWidth?: number;
+  detailImageHeight?: number;
   originalUrl: string;
   summary: string;
   detailSections: {

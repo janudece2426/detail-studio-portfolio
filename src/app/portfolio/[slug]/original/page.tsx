@@ -10,6 +10,14 @@ type OriginalPageProps = {
   }>;
 };
 
+const DETAIL_IMAGE_TILE_HEIGHT = 8000;
+
+function getImageTileUrl(imageUrl: string, width: number, top: number, height: number) {
+  const separator = imageUrl.includes("?") ? "&" : "?";
+
+  return `${imageUrl}${separator}rect=0,${top},${width},${height}&w=${width}&fit=crop&q=100`;
+}
+
 export async function generateStaticParams() {
   const items = await getPortfolioItems();
 
@@ -41,6 +49,25 @@ export default async function OriginalPage({ params }: OriginalPageProps) {
   }
 
   const imageMaxWidth = Math.min(item.detailImageWidth || 800, 800);
+  const shouldTileImage =
+    item.detailImage &&
+    item.detailImage.includes("cdn.sanity.io/images/") &&
+    item.detailImageWidth &&
+    item.detailImageHeight &&
+    item.detailImageHeight > DETAIL_IMAGE_TILE_HEIGHT;
+
+  const imageTiles = shouldTileImage
+    ? Array.from({ length: Math.ceil(item.detailImageHeight! / DETAIL_IMAGE_TILE_HEIGHT) }, (_, index) => {
+        const top = index * DETAIL_IMAGE_TILE_HEIGHT;
+        const height = Math.min(DETAIL_IMAGE_TILE_HEIGHT, item.detailImageHeight! - top);
+
+        return {
+          height,
+          src: getImageTileUrl(item.detailImage!, item.detailImageWidth!, top, height),
+          top,
+        };
+      })
+    : [];
 
   return (
     <main className="min-h-screen bg-charcoal px-4 py-6 text-ivory sm:px-8">
@@ -62,7 +89,18 @@ export default async function OriginalPage({ params }: OriginalPageProps) {
           className="mx-auto overflow-hidden rounded-lg border border-white/10 bg-white p-0 shadow-2xl"
           style={{ maxWidth: imageMaxWidth }}
         >
-          {item.detailImage ? (
+          {imageTiles.length ? (
+            imageTiles.map((tile) => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                key={tile.top}
+                src={tile.src}
+                alt={`${item.title} 원본 상세페이지`}
+                className="block w-full"
+                loading="lazy"
+              />
+            ))
+          ) : item.detailImage ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={item.detailImage}

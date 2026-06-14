@@ -12,7 +12,7 @@ type SanityPortfolio = {
   detailImage?: {
     asset?: {
       url?: string;
-      metadata?: { dimensions?: { width?: number } };
+      metadata?: { dimensions?: { width?: number; height?: number } };
     };
   };
   originalUrl?: string;
@@ -27,7 +27,7 @@ const portfolioFields = `
   point,
   summary,
   thumbnail{asset->{url}},
-  detailImage{asset->{url, metadata{dimensions{width}}}},
+  detailImage{asset->{url, metadata{dimensions{width, height}}}},
   originalUrl,
   accent
 `;
@@ -50,6 +50,7 @@ function toPortfolioItem(item: SanityPortfolio): PortfolioItem | null {
     image: thumbnailUrl,
     detailImage: detailImageUrl,
     detailImageWidth: item.detailImage?.asset?.metadata?.dimensions?.width,
+    detailImageHeight: item.detailImage?.asset?.metadata?.dimensions?.height,
     originalUrl: item.originalUrl || detailImageUrl || "#",
     summary: item.summary || item.point,
     detailSections: [],
