@@ -10,6 +10,8 @@ type OriginalPageProps = {
   }>;
 };
 
+export const dynamic = "force-dynamic";
+
 const DETAIL_IMAGE_TILE_HEIGHT = 8000;
 
 function getImageTileUrl(imageUrl: string, width: number, top: number, height: number) {

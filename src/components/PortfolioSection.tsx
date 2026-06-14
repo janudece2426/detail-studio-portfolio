@@ -71,7 +71,7 @@ function PortfolioCard({ item }: { item: PortfolioItem }) {
       transition={{ duration: 0.35 }}
     >
       <Link
-        href={`/portfolio/${item.slug}/original`}
+        href={`/portfolio/${encodeURIComponent(item.slug)}/original`}
         className="group block overflow-hidden rounded-lg border border-white/10 bg-white/[0.055] p-4 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-gold/30"
       >
         <PortfolioMockup item={item} />

@@ -13,6 +13,8 @@ type PortfolioDetailPageProps = {
   }>;
 };
 
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams() {
   const items = await getPortfolioItems();
 

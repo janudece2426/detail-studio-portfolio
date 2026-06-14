@@ -76,19 +76,24 @@ export async function getPortfolioItems(): Promise<PortfolioItem[]> {
 }
 
 export async function getPortfolioItemBySlug(slug: string): Promise<PortfolioItem | undefined> {
+  const decodedSlug = decodeURIComponent(slug);
+
   if (!hasSanityConfig) {
-    return portfolioItems.find((item) => item.slug === slug);
+    return portfolioItems.find((item) => item.slug === decodedSlug || item.slug === slug);
   }
 
   try {
     const item = await sanityClient.fetch<SanityPortfolio | null>(
       `*[_type == "portfolio" && slug.current == $slug][0] {${portfolioFields}}`,
-      { slug },
+      { slug: decodedSlug },
       { next: { revalidate: 60 } },
     );
     const mappedItem = item ? toPortfolioItem(item) : null;
-    return mappedItem || portfolioItems.find((fallbackItem) => fallbackItem.slug === slug);
+    return (
+      mappedItem ||
+      portfolioItems.find((fallbackItem) => fallbackItem.slug === decodedSlug || fallbackItem.slug === slug)
+    );
   } catch {
-    return portfolioItems.find((item) => item.slug === slug);
+    return portfolioItems.find((item) => item.slug === decodedSlug || item.slug === slug);
   }
 }
