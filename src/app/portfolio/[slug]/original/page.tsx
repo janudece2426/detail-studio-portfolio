@@ -1,4 +1,4 @@
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -43,7 +43,7 @@ export default async function OriginalPage({ params }: OriginalPageProps) {
   return (
     <main className="min-h-screen bg-charcoal px-4 py-6 text-ivory sm:px-8">
       <div className="mx-auto max-w-5xl">
-        <div className="mb-6 flex flex-col gap-4 border-b border-white/10 pb-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mb-6 border-b border-white/10 pb-6">
           <div>
             <Link
               href="/#portfolio"
@@ -54,17 +54,6 @@ export default async function OriginalPage({ params }: OriginalPageProps) {
             </Link>
             <h1 className="mt-4 text-2xl font-semibold text-ivory sm:text-4xl">{item.title}</h1>
           </div>
-          {item.originalUrl && item.originalUrl !== "#" ? (
-            <a
-              href={item.originalUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex w-fit items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.05] px-5 py-3 text-sm font-semibold text-ivory transition hover:border-gold/40 hover:bg-gold/10"
-            >
-              외부 링크 열기
-              <ExternalLink size={15} />
-            </a>
-          ) : null}
         </div>
 
         <section className="mx-auto max-w-[800px] overflow-hidden rounded-lg border border-white/10 bg-white p-0 shadow-2xl">
