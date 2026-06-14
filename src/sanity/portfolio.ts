@@ -32,6 +32,9 @@ function toPortfolioItem(item: SanityPortfolio): PortfolioItem | null {
     return null;
   }
 
+  const thumbnailUrl = item.thumbnail?.asset?.url;
+  const detailImageUrl = item.detailImage?.asset?.url || thumbnailUrl;
+
   return {
     slug: item.slug.current,
     title: item.title,
@@ -39,9 +42,9 @@ function toPortfolioItem(item: SanityPortfolio): PortfolioItem | null {
     scope: item.scope?.length ? item.scope : ["기획", "카피", "디자인"],
     point: item.point,
     accent: item.accent || "gold",
-    image: item.thumbnail?.asset?.url,
-    detailImage: item.detailImage?.asset?.url,
-    originalUrl: item.originalUrl || item.detailImage?.asset?.url || "#",
+    image: thumbnailUrl,
+    detailImage: detailImageUrl,
+    originalUrl: item.originalUrl || detailImageUrl || "#",
     summary: item.summary || item.point,
     detailSections: [],
   };

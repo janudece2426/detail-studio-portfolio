@@ -59,7 +59,7 @@ export const portfolioType = defineType({
     defineField({
       name: "thumbnail",
       title: "썸네일 이미지",
-      description: "추천 1000 x 1000px 정사각형",
+      description: "포트폴리오 목록 카드에 보이는 이미지입니다. 추천 1000 x 1000px 정사각형",
       type: "image",
       options: {
         hotspot: true,
@@ -68,7 +68,7 @@ export const portfolioType = defineType({
     defineField({
       name: "detailImage",
       title: "긴 상세페이지 원본 이미지",
-      description: "추천 가로 800px, 세로는 작업물 길이 그대로",
+      description: "고객이 썸네일을 클릭했을 때 보이는 원본 이미지입니다. 추천 가로 800px, 세로는 작업물 길이 그대로",
       type: "image",
     }),
     defineField({
