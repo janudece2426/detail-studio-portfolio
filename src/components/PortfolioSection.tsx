@@ -25,7 +25,7 @@ export function PortfolioSection({ items = portfolioItems }: PortfolioSectionPro
           <SectionHeading
             eyebrow="Portfolio"
             title="Portfolio"
-            description="상품의 매력을 구조화하고, 구매로 이어지는 흐름을 디자인합니다."
+            description="상품의 매력을 구조화하고, 구매로 이어지는 흐름을 디자인합니다. 썸네일을 클릭하면 원본 상세페이지를 볼 수 있습니다."
           />
           <div className="flex flex-wrap gap-2">
             {categories.map((category) => (
