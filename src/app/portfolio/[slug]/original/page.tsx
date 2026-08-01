@@ -2,6 +2,7 @@ import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { OriginalImageViewer } from "@/components/OriginalImageViewer";
 import { getPortfolioItemBySlug, getPortfolioItems } from "@/sanity/portfolio";
 
 type OriginalPageProps = {
@@ -87,37 +88,12 @@ export default async function OriginalPage({ params }: OriginalPageProps) {
           </div>
         </div>
 
-        <section
-          className="mx-auto overflow-hidden rounded-lg border border-white/10 bg-white p-0 shadow-2xl"
-          style={{ maxWidth: imageMaxWidth }}
-        >
-          {imageTiles.length ? (
-            imageTiles.map((tile) => (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                key={tile.top}
-                src={tile.src}
-                alt={`${item.title} 원본 상세페이지`}
-                className="block w-full"
-                loading="lazy"
-              />
-            ))
-          ) : item.detailImage ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={item.detailImage}
-              alt={`${item.title} 원본 상세페이지`}
-              className="block w-full"
-            />
-          ) : (
-            <div className="bg-charcoal p-10 text-center">
-              <p className="text-lg font-semibold text-ivory">원본 이미지가 아직 등록되지 않았습니다.</p>
-              <p className="mt-3 text-sm leading-7 text-muted">
-                관리자 페이지에서 긴 상세페이지 원본 이미지를 업로드하면 이곳에 전체 길이로 표시됩니다.
-              </p>
-            </div>
-          )}
-        </section>
+        <OriginalImageViewer
+          detailImage={item.detailImage}
+          imageMaxWidth={imageMaxWidth}
+          imageTiles={imageTiles}
+          title={item.title}
+        />
       </div>
     </main>
   );

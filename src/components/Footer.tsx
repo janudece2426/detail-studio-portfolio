@@ -1,3 +1,5 @@
+import { contactChannels } from "@/data/contact";
+
 export function Footer() {
   return (
     <footer className="border-t border-white/10 bg-charcoal px-5 py-10 sm:px-8">
@@ -8,10 +10,18 @@ export function Footer() {
         </div>
         <p>Copyright 2026 Detail Studio. All rights reserved.</p>
         <div className="flex gap-4">
-          <a href="https://example.com/instagram" className="transition hover:text-ivory">
+          <a
+            href={contactChannels.instagram}
+            target="_blank"
+            rel="noreferrer"
+            className="transition hover:text-ivory"
+          >
             Instagram
           </a>
-          <a href="mailto:hello@detailstudio.kr" className="transition hover:text-ivory">
+          <a
+            href={`mailto:${contactChannels.email}`}
+            className="transition hover:text-ivory"
+          >
             Email
           </a>
         </div>

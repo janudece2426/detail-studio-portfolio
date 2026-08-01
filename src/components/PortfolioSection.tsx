@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
@@ -13,6 +13,7 @@ type PortfolioSectionProps = {
 
 export function PortfolioSection({ items = portfolioItems }: PortfolioSectionProps) {
   const [active, setActive] = useState<PortfolioCategory>("전체");
+  const reduceMotion = useReducedMotion();
   const filtered = useMemo(
     () => items.filter((item) => active === "전체" || item.category === active),
     [active, items],
@@ -49,10 +50,10 @@ export function PortfolioSection({ items = portfolioItems }: PortfolioSectionPro
           썸네일을 클릭하면 원본 상세페이지를 볼 수 있습니다.
         </p>
 
-        <motion.div layout className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          <AnimatePresence mode="popLayout">
+        <motion.div layout={!reduceMotion} className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          <AnimatePresence mode="popLayout" initial={!reduceMotion}>
             {filtered.map((item) => (
-              <PortfolioCard key={item.title} item={item} />
+              <PortfolioCard key={item.title} item={item} reduceMotion={Boolean(reduceMotion)} />
             ))}
           </AnimatePresence>
         </motion.div>
@@ -61,14 +62,14 @@ export function PortfolioSection({ items = portfolioItems }: PortfolioSectionPro
   );
 }
 
-function PortfolioCard({ item }: { item: PortfolioItem }) {
+function PortfolioCard({ item, reduceMotion }: { item: PortfolioItem; reduceMotion: boolean }) {
   return (
     <motion.div
-      layout
-      initial={{ opacity: 0, y: 18 }}
+      layout={!reduceMotion}
+      initial={reduceMotion ? false : { opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 18 }}
-      transition={{ duration: 0.35 }}
+      exit={reduceMotion ? { opacity: 1 } : { opacity: 0, y: 18 }}
+      transition={{ duration: reduceMotion ? 0 : 0.35 }}
     >
       <Link
         href={`/portfolio/${encodeURIComponent(item.slug)}/original`}

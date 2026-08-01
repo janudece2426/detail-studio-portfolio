@@ -1,7 +1,12 @@
+export const contactChannels = {
+  email: "jdart2026@gmail.com",
+  instagram: "https://www.instagram.com/jdart1018/",
+} as const;
+
 export const contactLinks = [
   {
     label: "이메일 문의",
-    href: "https://mail.google.com/mail/?view=cm&fs=1&to=jdart2026@gmail.com",
+    href: `https://mail.google.com/mail/?view=cm&fs=1&to=${contactChannels.email}`,
   },
   {
     label: "카카오톡 문의",
@@ -13,6 +18,6 @@ export const contactLinks = [
   },
   {
     label: "인스타그램 링크",
-    href: "https://www.instagram.com/jdart1018/",
+    href: contactChannels.instagram,
   },
 ];

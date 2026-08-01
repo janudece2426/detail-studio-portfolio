@@ -1,29 +1,15 @@
 "use client";
 
 import { Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const navItems = ["Home", "Services", "Portfolio", "Process", "Contact"];
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   return (
-    <header
-      className={`fixed left-0 right-0 top-0 z-50 border-b transition-all duration-300 ${
-        scrolled
-          ? "border-white/10 bg-charcoal/82 shadow-glow backdrop-blur-xl"
-          : "border-white/5 bg-charcoal/45 backdrop-blur-md"
-      }`}
-    >
+    <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-charcoal/82 shadow-glow backdrop-blur-xl">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
         <a href="#home" className="text-sm font-semibold tracking-[0.28em] text-ivory">
           Detail Studio
@@ -41,7 +27,8 @@ export function Header() {
         </div>
         <button
           type="button"
-          aria-label="메뉴 열기"
+          aria-label={isOpen ? "메뉴 닫기" : "메뉴 열기"}
+          aria-expanded={isOpen}
           onClick={() => setIsOpen((value) => !value)}
           className="grid size-10 place-items-center rounded-full border border-white/10 bg-white/[0.04] text-ivory md:hidden"
         >

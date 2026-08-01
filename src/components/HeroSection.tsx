@@ -1,10 +1,12 @@
 "use client";
 
 import { ArrowRight, Eye } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { GraphBackground } from "./GraphBackground";
 
 export function HeroSection() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <section
       id="home"
@@ -68,9 +70,11 @@ export function HeroSection() {
       </svg>
       <div className="mx-auto grid max-w-7xl items-center gap-16 lg:grid-cols-[1.05fr_0.95fr]">
         <motion.div
-          initial={{ opacity: 0, y: 26 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 26 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          transition={
+            reduceMotion ? { duration: 0 } : { duration: 0.7, ease: [0.22, 1, 0.36, 1] }
+          }
         >
           <div>
             <p className="mb-4 text-sm font-bold uppercase tracking-[0.34em] text-gold/90 sm:text-[15px]">
@@ -116,9 +120,13 @@ export function HeroSection() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.96, x: 24 }}
+          initial={reduceMotion ? false : { opacity: 0, scale: 0.96, x: 24 }}
           animate={{ opacity: 1, scale: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          transition={
+            reduceMotion
+              ? { duration: 0 }
+              : { duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }
+          }
           className="relative mx-auto h-[520px] w-full max-w-[520px]"
         >
           <MockupCard className="left-0 top-8 rotate-[-7deg]" accent="gold" title="USP Flow" />

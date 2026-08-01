@@ -15,8 +15,8 @@ export function ServicesSection() {
             const Icon = item.icon;
             return (
               <FadeUp key={item.title} delay={index * 0.08}>
-                <div className="group relative h-full overflow-hidden rounded-lg border border-white/10 bg-white/[0.055] p-8 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-gold/30">
-                  <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent opacity-0 transition group-hover:opacity-100" />
+                <div className="relative h-full overflow-hidden rounded-lg border border-white/10 bg-white/[0.055] p-8 backdrop-blur-xl">
+                  <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent opacity-40" />
                   <div className="grid size-12 place-items-center rounded-lg border border-white/10 bg-ink text-gold">
                     <Icon size={22} />
                   </div>
