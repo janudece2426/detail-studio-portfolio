@@ -18,7 +18,7 @@ const DETAIL_IMAGE_TILE_HEIGHT = 8000;
 function getImageTileUrl(imageUrl: string, width: number, top: number, height: number) {
   const separator = imageUrl.includes("?") ? "&" : "?";
 
-  return `${imageUrl}${separator}rect=0,${top},${width},${height}&w=${width}&fit=crop&q=100`;
+  return `${imageUrl}${separator}rect=0,${top},${width},${height}&w=${width}&q=100`;
 }
 
 export async function generateStaticParams() {
